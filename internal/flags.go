@@ -1,6 +1,7 @@
 package internal
 
 func GetMode(flags []string) []string {
+  trimLeading(flags)
   var processedFlags []string
 
   for _, flag := range flags {
@@ -9,11 +10,22 @@ func GetMode(flags []string) []string {
         processedFlags = append(processedFlags, "error")
       }
     } else {
-      processedFlags = append(processedFlags, flag)
+      if !contains(processedFlags, flag) {
+        processedFlags = append(processedFlags, flag)
+      }
     }
   }
 
   return processedFlags
+}
+
+// remove leading '-'
+func trimLeading(flags []string) {
+  for i, flag := range flags {
+    if len(flag) > 0 && flag[0] == '-' {
+      flags[i] = flag[1:]
+    }
+  }
 }
 
 // check if flag is allowed

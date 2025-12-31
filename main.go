@@ -1,18 +1,18 @@
 package main
 
 import (
-	"fmt"
-	"os"
+  "fmt"
+  "os"
 
-	"go-memo/internal"
+  "go-memo/internal"
 )
 
 func main() {
-	args := os.Args[1:]
-	flags, params := internal.GetParams(args)
-	mode := internal.GetMode(flags)
+  args := os.Args[1:]
+  flags, params := internal.GetParams(args)
+  mode := internal.GetMode(flags)
 
-	fmt.Println("flags:", flags)
-	fmt.Println("mode:", mode)
-	fmt.Println("params:", params)
+  fmt.Printf("flags: %q\n", flags)
+  fmt.Printf("mode: %q\n", mode)
+  fmt.Printf("params: %q\n", params)
 }
