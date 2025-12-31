@@ -8,7 +8,11 @@ import (
 )
 
 func main() {
-	fmt.Println("Args:", os.Args[1:])
 	args := os.Args[1:]
-	fmt.Println(internal.GetParams(args))
+	flags, params := internal.GetParams(args)
+	mode := internal.GetMode(flags)
+
+	fmt.Println("flags:", flags)
+	fmt.Println("mode:", mode)
+	fmt.Println("params:", params)
 }
