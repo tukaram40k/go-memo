@@ -15,8 +15,8 @@ func Execute(flags []string, params []string) {
 		ProcessVersion()
 	}
 
-	if flags[0] == "add" {
-
+	if flags[0] == "add" && len(params) > 0{
+		ProcessAdd(params[0])
 	}
 
 	if flags[0] == "list" {

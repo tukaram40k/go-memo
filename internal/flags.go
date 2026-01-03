@@ -32,6 +32,6 @@ func trimLeading(flags []string) {
 
 // check if flag is allowed
 func isAllowed(flag string) bool {
-	allowedFlags := []string{"help", "version", "add", "list", "remove"}
+	allowedFlags := []string{"help", "version", "config", "add", "list", "remove"}
 	return slices.Contains(allowedFlags, flag)
 }
