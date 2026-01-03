@@ -8,11 +8,11 @@ func Execute(flags []string, params []string) {
 	}
 
 	if flags[0] == "help" {
-
+		ProcessHelp()
 	}
 
 	if flags[0] == "version" {
-
+		ProcessVersion()
 	}
 
 	if flags[0] == "add" {
