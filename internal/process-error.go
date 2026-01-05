@@ -1,12 +1,8 @@
 package internal
 
-import (
-	"fmt"
-	"os"
-)
+import "fmt"
 
-func ProcessError(flags []string) {
+func ProcessError(flags []string) error {
 	fmt.Println("Unknown arguments")
-	ProcessHelp()
-	os.Exit(0)
+	return ProcessHelp()
 }

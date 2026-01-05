@@ -16,5 +16,8 @@ func main() {
 	fmt.Printf("mode: %q\n", flags)
 	fmt.Printf("params: %q\n\n", params)
 
-	internal.Execute(flags, params)
+	err := internal.Execute(flags, params)
+	if err != nil {
+		fmt.Printf("runtime error: %v\n", err)
+	}
 }

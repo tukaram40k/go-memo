@@ -1,11 +1,8 @@
 package internal
 
-import (
-	"fmt"
-	"os"
-)
+import "fmt"
 
-func ProcessVersion() {
-	fmt.Println("0.0.0")
-	os.Exit(0)
+func ProcessVersion() error {
+	fmt.Println("go-memo version: 0.0.0")
+	return nil
 }

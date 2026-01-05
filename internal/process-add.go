@@ -1,16 +1,15 @@
 package internal
 
-import (
-	"fmt"
-	"os"
-)
+import "fmt"
 
-func ProcessAdd(params string) {
+func ProcessAdd(params string) error {
 	userDataPath, err := GetUserDataPath()
 	if err != nil {
-		fmt.Printf("configuration error: %v\n", err)
-		os.Exit(1)
+		return err
 	}
+
 	fmt.Printf("params: %q\n", params)
 	fmt.Printf("user data path: %q\n", userDataPath)
+
+	return nil
 }

@@ -1,22 +1,25 @@
 package internal
 
-import "slices"
+import (
+	"fmt"
+	"slices"
+)
 
-func Execute(flags []string, params []string) {
-	if slices.Contains(flags, "error") || len(flags) > 1 {
-		ProcessError(flags)
+func Execute(flags []string, params []string) error {
+	if slices.Contains(flags, "error") || len(flags) != 1 {
+		return ProcessError(flags)
 	}
 
 	if flags[0] == "help" {
-		ProcessHelp()
+		return ProcessHelp()
 	}
 
 	if flags[0] == "version" {
-		ProcessVersion()
+		return ProcessVersion()
 	}
 
 	if flags[0] == "add" && len(params) > 0{
-		ProcessAdd(params[0])
+		return ProcessAdd(params[0])
 	}
 
 	if flags[0] == "list" {
@@ -26,4 +29,6 @@ func Execute(flags []string, params []string) {
 	if flags[0] == "remove" {
 
 	}
+
+	return fmt.Errorf("unknown error")
 }
