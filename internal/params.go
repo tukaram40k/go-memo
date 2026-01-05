@@ -13,7 +13,7 @@ func GetParams(args []string) ([]string, []string) {
 		}
 	}
 
-	if params[0][0] == ' ' {
+	if len(params[0]) > 0 && params[0][0] == ' ' {
 		params[0] = params[0][1:]
 	}
 	return flags, params
