@@ -1,14 +1,16 @@
 package internal
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 const defaultConfig = "# go-memo configuration\npath = ~/Documents/go-memo"
 
 // read or create .config file
-func GetConfig() (string, error) {
+func GetUserDataPath() (string, error) {
 	configPath, err := getConfigPath()
 	if err != nil {
 		return "", err
@@ -30,7 +32,12 @@ func GetConfig() (string, error) {
 		return "", err
 	}
 
-	return string(content), nil
+	userDataPath, err := extractUserDataPath(string(content))
+	if err != nil {
+		return "", err
+	}
+
+	return userDataPath, nil
 }
 
 // creates full path to .config
@@ -41,4 +48,29 @@ func getConfigPath() (string, error) {
 	}
 
 	return filepath.Join(home, ".go-memo", ".config"), nil
+}
+
+// extract path to user data from .config contents
+func extractUserDataPath(content string) (string, error) {
+	lines := strings.SplitSeq(content, "\n")
+
+	for line := range lines {
+		line = strings.TrimSpace(line)
+		if line == "" || strings.HasPrefix(line, "#") {
+			continue
+		}
+
+		if strings.HasPrefix(line, "path = ") {
+			path := strings.TrimPrefix(line, "path = ")
+			path = strings.TrimSpace(path)
+
+			if path == "" {
+				return "", fmt.Errorf("empty path in .config")
+			}
+
+			return path, nil
+		}
+	}
+
+	return "", fmt.Errorf("path not found in .config")
 }
