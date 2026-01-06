@@ -21,9 +21,9 @@ func GetUserDataPath() (string, error) {
 	// check if file doesnt exist
 	if _, err := os.Stat(configPath); os.IsNotExist(err) {
 		// create directory with rwxr-xr-x
-    if err := os.Mkdir(filepath.Dir(configPath), 0755); err != nil {
-      return "", err
-    }
+		if err := os.Mkdir(filepath.Dir(configPath), 0755); err != nil {
+			return "", err
+		}
 		// create file with rw-r--r--
 		if err := os.WriteFile(configPath, []byte(defaultConfig), 0644); err != nil {
 			return "", err
@@ -72,7 +72,8 @@ func GetUserFilePath(userDataPath string) (string, error) {
 	}
 
 	// check if file exists
-	_, err := os.Stat(path); if err == nil {
+	_, err := os.Stat(path)
+	if err == nil {
 		return path, nil
 	}
 

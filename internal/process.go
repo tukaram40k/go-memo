@@ -18,7 +18,7 @@ func Execute(flags []string, params []string) error {
 		return ProcessVersion()
 	}
 
-	if flags[0] == "add" && len(params) > 0{
+	if flags[0] == "add" && len(params) > 0 {
 		return ProcessAdd(params[0])
 	}
 
