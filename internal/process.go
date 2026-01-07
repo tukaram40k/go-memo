@@ -23,7 +23,7 @@ func Execute(flags []string, params []string) error {
 	}
 
 	if flags[0] == "list" {
-
+		return ProcessList()
 	}
 
 	if flags[0] == "remove" {
