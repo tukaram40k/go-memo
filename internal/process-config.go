@@ -11,6 +11,25 @@ const defaultConfig = "# go-memo configuration\npath = ~/Documents/go-memo"
 const defaultUserFileName = "go-memo-data.txt"
 const defaultUserFileContent = "# go-memo user data file\n"
 
+func ProcessConfig() error {
+	userDataPath, err := GetUserDataPath()
+	if err != nil {
+		return err
+	}
+
+	userFilePath, err := GetUserFilePath(userDataPath)
+	if err != nil {
+		return err
+	}
+
+	if userFilePath == "" {
+		return fmt.Errorf("configuration error")
+	}
+
+	fmt.Println("configuration finished successfully.")
+	return nil
+}
+
 // read or create .config file
 func GetUserDataPath() (string, error) {
 	configPath, err := getConfigPath()
