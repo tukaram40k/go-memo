@@ -7,15 +7,38 @@ func GetFlags(flags []string) []string {
 	var processedFlags []string
 
 	for _, flag := range flags {
-		if !isAllowed(flag) {
-			if !slices.Contains(processedFlags, "error") {
-				processedFlags = append(processedFlags, "error")
-			}
-		} else {
-			if !slices.Contains(processedFlags, flag) {
-				processedFlags = append(processedFlags, flag)
-			}
+		if flag == "help" || flag == "h" && !slices.Contains(processedFlags, "help") {
+			processedFlags = append(processedFlags, "help")
+			continue
 		}
+
+		if flag == "version" || flag == "v" && !slices.Contains(processedFlags, "version") {
+			processedFlags = append(processedFlags, "version")
+			continue
+		}
+
+		if flag == "config" || flag == "c" && !slices.Contains(processedFlags, "config") {
+			processedFlags = append(processedFlags, "config")
+			continue
+		}
+
+		if flag == "add" || flag == "a" && !slices.Contains(processedFlags, "add") {
+			processedFlags = append(processedFlags, "add")
+			continue
+		}
+
+		if flag == "list" || flag == "l" && !slices.Contains(processedFlags, "list") {
+			processedFlags = append(processedFlags, "list")
+			continue
+		}
+
+		if flag == "remove" || flag == "r" && !slices.Contains(processedFlags, "remove") {
+			processedFlags = append(processedFlags, "remove")
+			continue
+		}
+
+		processedFlags = append(processedFlags, "error")
+		break
 	}
 
 	return processedFlags
@@ -28,10 +51,4 @@ func trimLeading(flags []string) {
 			flags[i] = flag[1:]
 		}
 	}
-}
-
-// check if flag is allowed
-func isAllowed(flag string) bool {
-	allowedFlags := []string{"help", "version", "config", "add", "list", "remove"}
-	return slices.Contains(allowedFlags, flag)
 }
